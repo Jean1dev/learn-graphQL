@@ -41,3 +41,5 @@ export const handleError = (error: Error) => {
     if (env !== 'test' && env !== 'pipelines') { console.log(errorMessage); }
     return Promise.reject(new Error(errorMessage));
 }
+
+export const JWT_SECRET: string = process.env.JWT_SECRET

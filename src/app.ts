@@ -2,6 +2,7 @@ import * as express from 'express'
 import * as graphqlHTTP from 'express-graphql'
 import schema from './graphql/schema';
 import db from './models'
+import { extractJwtMiddleware } from './middlewares/extract-jwt.middleware';
 
 class App {
 
@@ -15,14 +16,15 @@ class App {
     private middleware(): void {
         this.express.use('/test', (req: express.Request, res: express.Response, next: express.NextFunction) => {
             res.send({
-                dae: 'dae'
+                dae: 'neura api'
             })
         })
 
         this.express.use('/graphql',
 
+            extractJwtMiddleware(),
+
             (req, res, next) => {
-                req['context'] = {}
                 req['context'].db = db
                 next()
             },
