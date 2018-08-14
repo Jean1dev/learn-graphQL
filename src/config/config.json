@@ -8,7 +8,7 @@
     },
     "test": {
       "username": "root",
-      "password": "1234",
+      "password": "obscure345",
       "database": "neurabd",
       "host": "127.0.0.1",
       "dialect": "mysql",

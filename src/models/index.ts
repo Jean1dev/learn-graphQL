@@ -11,7 +11,7 @@ let db = null
 
 if (!db) {
     db = {}
-    const operatorsAliases = false
+    const operatorsAliases = { $in: Sequelize.Op.in }
     config = Object.assign({operatorsAliases}, config)
 
     const sequelize: Sequelize.Sequelize = new Sequelize(
@@ -22,7 +22,8 @@ if (!db) {
     )
 
     fs.readdirSync(__dirname).filter((file: string) => {
-        return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js')
+        const fileSlice: string = file.slice(-3)
+        return (file.indexOf('.') !== 0) && (file !== basename) && ((fileSlice === '.js') || (fileSlice === '.ts'))
     }).forEach((file: string) => {
         const model = sequelize.import(path.join(__dirname, file))
         db[model['name']] = model
